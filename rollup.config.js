@@ -18,16 +18,17 @@ export default {
 	},
 	plugins: [
 		svelte({
-			dev: !production,
-			css: (css) => {
-				css.write('bundle.css');
-			}
+			compilerOptions: {
+				dev: !production
+			},
+			emitCss: true
 		}),
 		// Extract any component CSS into a separate file
 		css({ output: 'bundle.css' }),
 		resolve({
 			browser: true,
-			dedupe: ['svelte']
+			dedupe: ['svelte'],
+			exportConditions: ['svelte']
 		}),
 		commonjs(),
 		// In dev mode, start livereload so the browser refreshes on changes
